@@ -7,7 +7,7 @@
           </td>
         </tr>
       </table>
-      <button class="restart-button">Restart</button>
+      <button class="restart-button" @click="restart">Restart</button>
     </div>
   </template>
   
@@ -21,35 +21,45 @@
           ["","",""],
           ["","",""]
         ],
-        isAvailable: false
       }
     },
     methods: {
       computerMove() {
-        this.isAvailable = true;
-        while(this.isAvailable) {
+        while(this.isAvailableForCompTurn) {
           let compRow = Math.floor(Math.random() * 3);
           let compColumn = Math.floor(Math.random() * 3);
-          if(this.gameBoard[compRow][compColumn]) {
-            if(this.gameBoard[compRow][compColumn] === '') {
-              this.gameBoard[compRow][compColumn] = 'O';
-              this.isAvailable = false;
-            } else if(this.gameBoard[compRow][compColumn] === 'X' || this.gameBoard[compRow][compColumn] === 'O') {
-              continue;
-            }
+          if(this.gameBoard[compRow][compColumn] === '') {
+            this.gameBoard[compRow][compColumn] = 'O';
+            break;
           } else {
-            this.isAvailable = false;
+            continue;
           }
         }
       },
       userClick(userRow, userColumn) {
-        if(this.gameBoard[userRow][userColumn] === 'O' || this.gameBoard[userRow][userColumn] === 'X') {
-          return;
-        } else {
+        if(this.gameBoard[userRow][userColumn] === '') {
           this.gameBoard[userRow][userColumn] = 'X';
-          this.computerMove();
           this.$forceUpdate();
-        }       
+          if(this.isAvailableForCompTurn) {
+            this.computerMove(); 
+          }
+        } else {
+          return;
+        }     
+      },
+      isAvailableForCompTurn() {
+        for(let i=0; i<3; i++) {
+          for(let j=0; j<3; j++) {
+            if(this.gameBoard[i][j] !== '') {
+              return false;
+            } else {
+              return true;
+            }
+          }
+        }
+      },
+      restart() {
+        this.gameBoard = [["","",""], ["","",""], ["","",""]];
       }     
     }
   }
@@ -80,5 +90,8 @@
       background-color: aqua;
       padding: 10px;
       cursor: pointer;
+    }
+    .game .restart-button:focus {
+      outline: none;
     }
   </style>
