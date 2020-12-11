@@ -8,6 +8,8 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+  p {
+    margin-top: 125px;
+  }
 </style>
