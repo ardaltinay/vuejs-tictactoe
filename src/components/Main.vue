@@ -2,7 +2,8 @@
     <div class="game">
       <table v-if="gameBoard" cellspacing="0">
         <tr v-for="(row, rowIndex) in gameBoard" :key="rowIndex">
-          <td :class="gameBoard[rowIndex][columnIndex] === 'X' ? 'td-X' : 'td-O'" v-for="(column, columnIndex) in gameBoard" :key="columnIndex" @click="userClick(rowIndex, columnIndex)">
+          <td :class="gameBoard[rowIndex][columnIndex] === 'X' ? 'td-X' : 'td-O'" v-for="(column, columnIndex) in gameBoard" 
+            :key="columnIndex" @click="userClick(rowIndex, columnIndex)">
             {{ gameBoard[rowIndex][columnIndex] }}
           </td>
         </tr>
@@ -24,7 +25,8 @@
           ["","",""]
         ],
         winner: null,
-        draw: null
+        draw: null,
+        isUserTurn: true
       }
     },
     methods: {
@@ -39,20 +41,25 @@
         }
       },
       userClick(userRow, userColumn) {
-        if(this.winner) {
+        if(this.winner || !this.isUserTurn) {
           return;
         }
         if(this.gameBoard[userRow][userColumn] === '') {
+          this.isUserTurn = false;
           this.gameBoard[userRow][userColumn] = 'X';
           if(this.isDone()) {
             this.winner = 'X';
           } else if(this.isDraw()) {
             this.draw = 'draw';
           } else {
-            this.computerMove();
-            if(this.isDone()) {
-              this.winner = 'O';
-            }
+            setTimeout(() => {
+              this.computerMove();
+              if(this.isDone()) {
+                this.winner = 'O';
+              }
+              this.isUserTurn = true;
+              this.$forceUpdate();
+            }, 1000); 
           }
           this.$forceUpdate();
         } else {
@@ -96,6 +103,7 @@
         this.gameBoard = [["","",""], ["","",""], ["","",""]];
         this.winner = null;
         this.draw = null;
+        this.isUserTurn = true;
       }     
     }
   }
@@ -104,7 +112,7 @@
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
     .game table {
-      margin: 50px auto;
+      margin: 100px auto 50px;
     }
     .game table tr td {
       width: 70px;
