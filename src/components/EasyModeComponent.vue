@@ -1,6 +1,5 @@
 <template>
   <div class="game">
-    <h1>Tic-Tac-Toe</h1>
     <table v-if="gameBoard" cellspacing="0">
       <tr v-for="(row, rowIndex) in gameBoard" :key="rowIndex">
         <td :class="gameBoard[rowIndex][columnIndex] === 'X' ? 'td-X' : 'td-O'" v-for="(column, columnIndex) in gameBoard" 
@@ -19,7 +18,7 @@
   
 <script>
 export default {
-  name: 'Main',
+  name: 'EasyModeComponent',
   data() {
     return {
       gameBoard: [
@@ -114,9 +113,6 @@ export default {
   
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .game h1 {
-    margin-top: 50px;
-  }
   .game table {
     margin: 65px auto 50px;
   }
