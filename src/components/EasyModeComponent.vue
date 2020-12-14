@@ -1,4 +1,4 @@
-<template>
+<template v-slot="static-content">
   <div class="game">
     <table v-if="gameBoard" cellspacing="0">
       <tr v-for="(row, rowIndex) in gameBoard" :key="rowIndex">
