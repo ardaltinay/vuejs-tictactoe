@@ -1,5 +1,7 @@
 <template>
-  <h1>Medium Mode</h1>
+  <div>
+    
+  </div>
 </template>
 
 <script>

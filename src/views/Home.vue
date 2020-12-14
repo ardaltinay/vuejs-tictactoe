@@ -16,9 +16,9 @@
         <option>Hard</option>
       </select>
     </div>
-    <MultiplayerComponent v-if="isSingleMode == 'Multiplayer'"></MultiplayerComponent>
-    <SingleplayerComponent v-if="isSingleMode == 'Single Player'" :gameDifficulty="gameDifficulty"></SingleplayerComponent>
-    <FooterComponent></FooterComponent>
+    <multi-player-component v-if="isSingleMode == 'Multiplayer'"></multi-player-component>
+    <single-player-component v-if="isSingleMode == 'Single Player'" :gameDifficulty="gameDifficulty"></single-player-component>
+    <footer-component/>
   </div>
 </template>
 
@@ -31,9 +31,9 @@ import FooterComponent from '@/components/FooterComponent.vue'
 export default {
   name: 'Home',
   components: {
-    SingleplayerComponent,
-    MultiplayerComponent,
-    FooterComponent
+    'single-player-component': SingleplayerComponent,
+    'multi-player-component': MultiplayerComponent,
+    'footer-component': FooterComponent
   },
   data() {
     return {

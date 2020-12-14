@@ -1,8 +1,8 @@
 <template>
   <div class="game-single-player">
-    <EasyModeComponent v-if="gameDifficulty == 'Easy'"></EasyModeComponent>
-    <MediumModeComponent v-else-if="gameDifficulty == 'Medium'"></MediumModeComponent>
-    <HardModeComponent v-else-if="gameDifficulty == 'Hard'"></HardModeComponent>
+    <easy-mode-component v-if="gameDifficulty == 'Easy'"></easy-mode-component>
+    <medium-mode-component v-else-if="gameDifficulty == 'Medium'"></medium-mode-component>
+    <hard-mode-component v-else-if="gameDifficulty == 'Hard'"></hard-mode-component>
   </div>
   
 </template>
@@ -15,9 +15,9 @@
   export default {
     name: 'SingleplayerComponent',
     components: {
-      EasyModeComponent,
-      MediumModeComponent,
-      HardModeComponent
+      'easy-mode-component': EasyModeComponent,
+      'medium-mode-component': MediumModeComponent,
+      'hard-mode-component': HardModeComponent
     },
     props: ['gameDifficulty']
     
