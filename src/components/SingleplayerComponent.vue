@@ -1,23 +1,17 @@
 <template>
   <div class="game-single-player">
-    <easy-mode-component v-if="gameDifficulty == 'Easy'"></easy-mode-component>
-    <medium-mode-component v-else-if="gameDifficulty == 'Medium'"></medium-mode-component>
-    <hard-mode-component v-else-if="gameDifficulty == 'Hard'"></hard-mode-component>
+    <tic-tac-toe v-if="gameDifficulty" :difficulty="gameDifficulty"></tic-tac-toe>
   </div>
   
 </template>
 
 <script>
-  import EasyModeComponent from '@/components/EasyModeComponent.vue'
-  import MediumModeComponent from '@/components/MediumModeComponent.vue'
-  import HardModeComponent from '@/components/HardModeComponent.vue'
+  import TicTacToe from '@/components/TicTacToe.vue'
 
   export default {
     name: 'SingleplayerComponent',
     components: {
-      'easy-mode-component': EasyModeComponent,
-      'medium-mode-component': MediumModeComponent,
-      'hard-mode-component': HardModeComponent
+      'tic-tac-toe': TicTacToe,
     },
     props: ['gameDifficulty']
     

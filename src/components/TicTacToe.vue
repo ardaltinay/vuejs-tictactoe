@@ -31,8 +31,9 @@ export default {
       isUserTurn: true
     }
   },
+  props: ["difficulty"],
   methods: {
-    computerMove() {
+    easyMove() {
       for(;;) {
         const compRow = Math.floor(Math.random() * 3);
         const compColumn = Math.floor(Math.random() * 3);
@@ -40,6 +41,21 @@ export default {
           this.gameBoard[compRow][compColumn] = 'O';
           break;
         } 
+      }
+    },
+    mediumMove() {
+
+    },
+    hardMove() {
+
+    },
+    computerMove() {
+      if(this.difficulty == 'Easy') {
+        this.easyMove();
+      } else if(this.difficulty == 'Medium') {
+        this.mediumMove();
+      } else if(this.difficulty == 'Hard') {
+        this.hardMove();
       }
     },
     userClick(userRow, userColumn) {
