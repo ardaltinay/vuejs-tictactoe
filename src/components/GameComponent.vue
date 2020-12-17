@@ -1,6 +1,6 @@
 <template>
-  <div class="game-single-player">
-    <tic-tac-toe v-if="gameDifficulty" :difficulty="gameDifficulty"></tic-tac-toe>
+  <div class="game-component">
+    <tic-tac-toe :difficulty="gameDifficulty" :modeIs="modeIs"></tic-tac-toe>
   </div>
   
 </template>
@@ -9,12 +9,11 @@
   import TicTacToe from '@/components/TicTacToe.vue'
 
   export default {
-    name: 'SingleplayerComponent',
+    name: 'GameComponent',
     components: {
       'tic-tac-toe': TicTacToe,
     },
-    props: ['gameDifficulty']
-    
+    props: ['gameDifficulty', 'modeIs'],
   }
 </script>
 

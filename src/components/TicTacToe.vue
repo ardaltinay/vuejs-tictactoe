@@ -28,10 +28,11 @@ export default {
       ],
       winner: null,
       draw: null,
-      isUserTurn: true
+      isUserTurn: true,
+      whichUser: 'X'
     }
   },
-  props: ["difficulty"],
+  props: ["difficulty", "modeIs"],
   methods: {
     easyMove() {
       for(;;) {
@@ -62,24 +63,28 @@ export default {
       if(this.winner || !this.isUserTurn) {
         return;
       }
-      if(this.gameBoard[userRow][userColumn] === '') {
+      if(this.gameBoard[userRow][userColumn] === '' && this.modeIs != 'Multiplayer') {
         this.isUserTurn = false;
-        this.gameBoard[userRow][userColumn] = 'X';
+        this.gameBoard[userRow][userColumn] = this.whichUser;
         if(this.isDone()) {
-          this.winner = 'X';
+          this.winner = this.whichUser;
         } else if(this.isDraw()) {
           this.draw = 'draw';
         } else {
           setTimeout(() => {
             this.computerMove();
-            if(this.isDone()) {
-              this.winner = 'O';
-            }
+            if(this.isDone()) {               // whichUser değiştirilecek.
+              this.winner = 'O';              // multiplayer modu çalışmıyor.
+              }
             this.isUserTurn = true;
             this.$forceUpdate();
           }, 800); 
         }
         this.$forceUpdate();
+      } else if(this.gameBoard[userRow][userColumn] === '' && this.modeIs == 'Multiplayer') {
+        this.whichUser = !this.whichUser;
+        this.userClick(userRow, userColumn);
+        return;
       } else {
         return;
       }

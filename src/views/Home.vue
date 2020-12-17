@@ -16,23 +16,20 @@
         <option>Hard</option>
       </select>
     </div>
-    <multi-player-component v-if="isSingleMode == 'Multiplayer'"></multi-player-component>
-    <single-player-component v-if="isSingleMode == 'Single Player'" :gameDifficulty="gameDifficulty"></single-player-component>
+    <game-component v-if="isSingleMode != ''" :gameDifficulty="gameDifficulty" :modeIs="isSingleMode"></game-component>
     <footer-component/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SingleplayerComponent from '@/components/SingleplayerComponent.vue'
-import MultiplayerComponent from '@/components/MultiplayerComponent.vue'
+import GameComponent from '@/components/GameComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 
 export default {
   name: 'Home',
   components: {
-    'single-player-component': SingleplayerComponent,
-    'multi-player-component': MultiplayerComponent,
+    'game-component': GameComponent,
     'footer-component': FooterComponent
   },
   data() {
