@@ -38,6 +38,14 @@ export default {
       gameDifficulty: ""
     }
   },
+  watch: {
+    isSingleMode: function() {
+      console.log("değişti");
+    },
+    gameDifficulty: function() {
+      console.log("değişti-1");
+    }
+  }
 }
 </script>
 

@@ -29,7 +29,7 @@ export default {
       winner: null,
       draw: null,
       isUserTurn: true,
-      whichUser: 'X'
+      whichUser: 'X',
     }
   },
   props: ["difficulty", "modeIs"],
@@ -44,8 +44,25 @@ export default {
         } 
       }
     },
-    mediumMove() {
-
+    mediumMove() {          // mod seçildikten sonra değişirse oyun resetlenecek
+      this.easyMove();      // easyMove 2. kez çalışıyor
+      for(let i=0; i<3; i++) {
+        if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
+          this.gameBoard[i][2] = 'O';
+        } else if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][2] == 'X') {
+          this.gameBoard[i][1] = 'O';
+        }
+      }
+      for(let i=0; i<3; i++) {
+        if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
+          this.gameBoard[2][i] = 'O';
+        } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[2][i] == 'X') {
+          this.gameBoard[1][i] = 'O';
+        }
+      }
+      if(this.gameBoard[0][0] == 'X' && this.gameBoard[1][1] == 'X') {
+        this.gameBoard[2][2] = 'O';
+      }
     },
     hardMove() {
 
@@ -65,9 +82,9 @@ export default {
       }
       if(this.gameBoard[userRow][userColumn] === '' && this.modeIs != 'Multiplayer') {
         this.isUserTurn = false;
-        this.gameBoard[userRow][userColumn] = this.whichUser;
+        this.gameBoard[userRow][userColumn] = 'X';
         if(this.isDone()) {
-          this.winner = this.whichUser;
+          this.winner = 'X';
         } else if(this.isDraw()) {
           this.draw = 'draw';
         } else {
@@ -81,11 +98,7 @@ export default {
           }, 800); 
         }
         this.$forceUpdate();
-      } else if(this.gameBoard[userRow][userColumn] === '' && this.modeIs == 'Multiplayer') {
-        this.whichUser = !this.whichUser;
-        this.userClick(userRow, userColumn);
-        return;
-      } else {
+      }  else {
         return;
       }
     },
