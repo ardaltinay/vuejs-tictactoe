@@ -45,24 +45,22 @@ export default {
       }
     },
     mediumMove() {          // mod seçildikten sonra değişirse oyun resetlenecek
-      this.easyMove();      // easyMove 2. kez çalışıyor
-      for(let i=0; i<3; i++) {
+      /*for(let i=0; i<3; i++) {
         if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
           this.gameBoard[i][2] = 'O';
         } else if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][2] == 'X') {
           this.gameBoard[i][1] = 'O';
-        }
-      }
-      for(let i=0; i<3; i++) {
-        if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
+        } else if(this.gameBoard[i][1] == 'X' && this.gameBoard[i][2] == 'X') {
+          this.gameBoard[i][0] = 'O';
+        } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
           this.gameBoard[2][i] = 'O';
         } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[2][i] == 'X') {
           this.gameBoard[1][i] = 'O';
+        } else if(this.gameBoard[1][i] == 'X' && this.gameBoard[2][i] == 'X') {
+          this.gameBoard[0][i] = 'O';
         }
-      }
-      if(this.gameBoard[0][0] == 'X' && this.gameBoard[1][1] == 'X') {
-        this.gameBoard[2][2] = 'O';
-      }
+      }*/
+      this.easyMove();
     },
     hardMove() {
 

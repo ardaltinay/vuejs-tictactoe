@@ -16,7 +16,7 @@
         <option>Hard</option>
       </select>
     </div>
-    <game-component v-if="isSingleMode != ''" :gameDifficulty="gameDifficulty" :modeIs="isSingleMode"></game-component>
+    <game-component :gameDifficulty="gameDifficulty" :modeIs="isSingleMode"></game-component>
     <footer-component/>
   </div>
 </template>

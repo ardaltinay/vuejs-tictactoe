@@ -1,6 +1,6 @@
 <template>
   <div class="game-component">
-    <tic-tac-toe :difficulty="gameDifficulty" :modeIs="modeIs"></tic-tac-toe>
+    <tic-tac-toe :difficulty="gameDifficulty" :modeIs="modeIs" v-if="gameDifficulty != '' || modeIs == 'Multiplayer'"></tic-tac-toe>
   </div>
   
 </template>
