@@ -45,21 +45,39 @@ export default {
       }
     },
     mediumMove() {          // mod seçildikten sonra değişirse oyun resetlenecek
-      /*for(let i=0; i<3; i++) {
+      for(let i=0; i<3; i++) {
         if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
-          this.gameBoard[i][2] = 'O';
+          if(this.gameBoard[i][2] == '') {
+            this.gameBoard[i][2] = 'O';
+            return;
+          }
         } else if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][2] == 'X') {
-          this.gameBoard[i][1] = 'O';
+          if(this.gameBoard[i][1] == '') {
+            this.gameBoard[i][1] = 'O';
+            return;
+          }
         } else if(this.gameBoard[i][1] == 'X' && this.gameBoard[i][2] == 'X') {
-          this.gameBoard[i][0] = 'O';
+          if(this.gameBoard[i][0] == '') {
+            this.gameBoard[i][0] = 'O';
+            return;
+          }  
         } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
-          this.gameBoard[2][i] = 'O';
+          if(this.gameBoard[2][i] == '') {
+            this.gameBoard[2][i] = 'O';
+            return;
+          }        
         } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[2][i] == 'X') {
-          this.gameBoard[1][i] = 'O';
+          if(this.gameBoard[1][i] == '') {
+            this.gameBoard[1][i] = 'O';
+            return;
+          }        
         } else if(this.gameBoard[1][i] == 'X' && this.gameBoard[2][i] == 'X') {
-          this.gameBoard[0][i] = 'O';
+          if(this.gameBoard[0][i] == '') {
+            this.gameBoard[0][i] = 'O';
+            return;
+          }        
         }
-      }*/
+      }
       this.easyMove();
     },
     hardMove() {
