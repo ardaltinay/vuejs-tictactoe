@@ -27,9 +27,10 @@ export default {
         ["","",""]
       ],
       winner: null,
-      draw: null,
-      isUserTurn: true,
+      draw: null,               // mod seçildikten sonra değişirse oyun resetlenecek
+      isUserTurn: true,         // multiplayer modu
       whichUser: 'X',
+      filledNumber: 0
     }
   },
   props: ["difficulty", "modeIs"],
@@ -44,7 +45,7 @@ export default {
         } 
       }
     },
-    mediumMove() {          // mod seçildikten sonra değişirse oyun resetlenecek
+    mediumMove() {          
       for(let i=0; i<3; i++) {
         if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
           if(this.gameBoard[i][2] == '') {
@@ -111,8 +112,38 @@ export default {
       }
       this.easyMove();
     },
-    hardMove() {
-
+    hardMove() {            
+      let playedNumber = this.playedMove();
+      console.log(playedNumber);
+      if(playedNumber == 1) {
+        if(this.gameBoard[0][0] == 'X' || this.gameBoard[0][2] == 'X' || this.gameBoard[2][0] == 'X' || this.gameBoard[2][2] == 'X') {
+          this.gameBoard[1][1] = 'O';
+          return;
+        } else if (this.gameBoard[1][1] == 'X') {
+          this.gameBoard[0][0] = 'O';
+          return;
+        } else {
+          if(this.gameBoard[0][0] == '') {
+            this.gameBoard[0][0] = 'O';
+            return;
+          } else if(this.gameBoard[0][2] == '') {
+            this.gameBoard[0][2] = 'O';
+            return;
+          } else if(this.gameBoard[2][0] == '') {
+            this.gameBoard[2][0] = 'O';
+            return;
+          } else if(this.gameBoard[2][2] == '') {
+            this.gameBoard[2][2] = 'O';
+            return;
+          }
+        }
+      } else if(playedNumber == 3) {
+        if(this.gameBoard[1][1] == '') {
+          this.gameBoard[1][1] = 'O';
+          return;
+        }
+      }
+      this.mediumMove();
     },
     computerMove() {
       if(this.difficulty == 'Easy') {
@@ -137,8 +168,8 @@ export default {
         } else {
           setTimeout(() => {
             this.computerMove();
-            if(this.isDone()) {               // whichUser değiştirilecek.
-              this.winner = 'O';              // multiplayer modu çalışmıyor.
+            if(this.isDone()) {               
+              this.winner = 'O';              
               }
             this.isUserTurn = true;
             this.$forceUpdate();
@@ -148,6 +179,17 @@ export default {
       }  else {
         return;
       }
+    },
+    playedMove() {
+      this.filledNumber = 0;
+      for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+          if(this.gameBoard[i][j] != '') {
+            this.filledNumber++;
+          }
+        }
+      }
+      return this.filledNumber;
     },
     isDone() {
       for(let i=0; i<3; i++) {
@@ -187,6 +229,7 @@ export default {
       this.winner = null;
       this.draw = null;
       this.isUserTurn = true;
+      this.filledNumber = 0;
     }     
   }
 }
