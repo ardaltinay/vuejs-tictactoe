@@ -78,6 +78,37 @@ export default {
           }        
         }
       }
+      if(this.gameBoard[0][0] == 'X' && this.gameBoard[1][1] == 'X') {
+        if(this.gameBoard[2][2] == '') {
+          this.gameBoard[2][2] = 'O';
+          return;
+        } 
+      } else if(this.gameBoard[0][0] == 'X' && this.gameBoard[2][2] == 'X') {
+        if(this.gameBoard[1][1] == '') {
+          this.gameBoard[1][1] = 'O';
+          return;
+        } 
+      } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][2] == 'X') {
+        if(this.gameBoard[0][0] == '') {
+          this.gameBoard[0][0] = 'O';
+          return;
+        } 
+      } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[1][1] == 'X') {
+        if(this.gameBoard[2][0] == '') {
+          this.gameBoard[2][0] = 'O';
+          return;
+        } 
+      } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[2][0] == 'X') {
+        if(this.gameBoard[1][1] == '') {
+          this.gameBoard[1][1] = 'O';
+          return;
+        } 
+      } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][0] == 'X') {
+        if(this.gameBoard[0][2] == '') {
+          this.gameBoard[0][2] = 'O';
+          return;
+        } 
+      }
       this.easyMove();
     },
     hardMove() {
