@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Tic-Tac-Toe</h1>
+    <h1 @click="restart">Tic-Tac-Toe</h1>
     <div>
       <label for="options">Choose game mode: </label>
       <select id="options" v-model="isSingleMode">
@@ -40,11 +40,14 @@ export default {
   },
   watch: {
     isSingleMode: function() {
-      console.log("değişti");
+      
     },
     gameDifficulty: function() {
       console.log("değişti-1");
     }
+  },
+  methods: {
+    
   }
 }
 </script>

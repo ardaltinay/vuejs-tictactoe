@@ -17,222 +17,222 @@
 </template>
   
 <script>
-export default {
-  name: 'EasyModeComponent',
-  data() {
-    return {
-      gameBoard: [
-        ["","",""],
-        ["","",""],
-        ["","",""]
-      ],
-      winner: null,
-      draw: null,               // mod seçildikten sonra değişirse oyun resetlenecek
-      isUserTurn: true,         // multiplayer modu
-      whichUser: 'X',
-      filledNumber: 0
-    }
-  },
-  props: ["difficulty", "modeIs"],
-  methods: {
-    easyMove() {
-      for(;;) {
-        const compRow = Math.floor(Math.random() * 3);
-        const compColumn = Math.floor(Math.random() * 3);
-        if(this.gameBoard[compRow][compColumn] === '') {
-          this.gameBoard[compRow][compColumn] = 'O';
-          break;
-        } 
+  export default {
+    name: 'EasyModeComponent',
+    data() {
+      return {
+        gameBoard: [
+          ["","",""],
+          ["","",""],
+          ["","",""]
+        ],
+        winner: null,
+        draw: null,               // mod seçildikten sonra değişirse oyun resetlenecek
+        isUserTurn: true,         // multiplayer modu
+        whichUser: 'X',
+        filledNumber: 0
       }
     },
-    mediumMove() {          
-      for(let i=0; i<3; i++) {
-        if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
-          if(this.gameBoard[i][2] == '') {
-            this.gameBoard[i][2] = 'O';
-            return;
-          }
-        } else if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][2] == 'X') {
-          if(this.gameBoard[i][1] == '') {
-            this.gameBoard[i][1] = 'O';
-            return;
-          }
-        } else if(this.gameBoard[i][1] == 'X' && this.gameBoard[i][2] == 'X') {
-          if(this.gameBoard[i][0] == '') {
-            this.gameBoard[i][0] = 'O';
-            return;
-          }  
-        } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
-          if(this.gameBoard[2][i] == '') {
-            this.gameBoard[2][i] = 'O';
-            return;
-          }        
-        } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[2][i] == 'X') {
-          if(this.gameBoard[1][i] == '') {
-            this.gameBoard[1][i] = 'O';
-            return;
-          }        
-        } else if(this.gameBoard[1][i] == 'X' && this.gameBoard[2][i] == 'X') {
-          if(this.gameBoard[0][i] == '') {
-            this.gameBoard[0][i] = 'O';
-            return;
-          }        
+    props: ["difficulty", "modeIs"],
+    methods: {
+      easyMove() {
+        for(;;) {
+          const compRow = Math.floor(Math.random() * 3);
+          const compColumn = Math.floor(Math.random() * 3);
+          if(this.gameBoard[compRow][compColumn] === '') {
+            this.gameBoard[compRow][compColumn] = 'O';
+            break;
+          } 
         }
-      }
-      if(this.gameBoard[0][0] == 'X' && this.gameBoard[1][1] == 'X') {
-        if(this.gameBoard[2][2] == '') {
-          this.gameBoard[2][2] = 'O';
-          return;
-        } 
-      } else if(this.gameBoard[0][0] == 'X' && this.gameBoard[2][2] == 'X') {
-        if(this.gameBoard[1][1] == '') {
-          this.gameBoard[1][1] = 'O';
-          return;
-        } 
-      } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][2] == 'X') {
-        if(this.gameBoard[0][0] == '') {
-          this.gameBoard[0][0] = 'O';
-          return;
-        } 
-      } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[1][1] == 'X') {
-        if(this.gameBoard[2][0] == '') {
-          this.gameBoard[2][0] = 'O';
-          return;
-        } 
-      } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[2][0] == 'X') {
-        if(this.gameBoard[1][1] == '') {
-          this.gameBoard[1][1] = 'O';
-          return;
-        } 
-      } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][0] == 'X') {
-        if(this.gameBoard[0][2] == '') {
-          this.gameBoard[0][2] = 'O';
-          return;
-        } 
-      }
-      this.easyMove();
-    },
-    hardMove() {            
-      let playedNumber = this.playedMove();
-      console.log(playedNumber);
-      if(playedNumber == 1) {
-        if(this.gameBoard[0][0] == 'X' || this.gameBoard[0][2] == 'X' || this.gameBoard[2][0] == 'X' || this.gameBoard[2][2] == 'X') {
-          this.gameBoard[1][1] = 'O';
-          return;
-        } else if (this.gameBoard[1][1] == 'X') {
-          this.gameBoard[0][0] = 'O';
-          return;
-        } else {
+      },
+      mediumMove() {          
+        for(let i=0; i<3; i++) {
+          if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
+            if(this.gameBoard[i][2] == '') {
+              this.gameBoard[i][2] = 'O';
+              return;
+            }
+          } else if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][2] == 'X') {
+            if(this.gameBoard[i][1] == '') {
+              this.gameBoard[i][1] = 'O';
+              return;
+            }
+          } else if(this.gameBoard[i][1] == 'X' && this.gameBoard[i][2] == 'X') {
+            if(this.gameBoard[i][0] == '') {
+              this.gameBoard[i][0] = 'O';
+              return;
+            }  
+          } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[1][i] == 'X') {
+            if(this.gameBoard[2][i] == '') {
+              this.gameBoard[2][i] = 'O';
+              return;
+            }        
+          } else if(this.gameBoard[0][i] == 'X' && this.gameBoard[2][i] == 'X') {
+            if(this.gameBoard[1][i] == '') {
+              this.gameBoard[1][i] = 'O';
+              return;
+            }        
+          } else if(this.gameBoard[1][i] == 'X' && this.gameBoard[2][i] == 'X') {
+            if(this.gameBoard[0][i] == '') {
+              this.gameBoard[0][i] = 'O';
+              return;
+            }        
+          }
+        }
+        if(this.gameBoard[0][0] == 'X' && this.gameBoard[1][1] == 'X') {
+          if(this.gameBoard[2][2] == '') {
+            this.gameBoard[2][2] = 'O';
+            return;
+          } 
+        } else if(this.gameBoard[0][0] == 'X' && this.gameBoard[2][2] == 'X') {
+          if(this.gameBoard[1][1] == '') {
+            this.gameBoard[1][1] = 'O';
+            return;
+          } 
+        } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][2] == 'X') {
           if(this.gameBoard[0][0] == '') {
             this.gameBoard[0][0] = 'O';
             return;
-          } else if(this.gameBoard[0][2] == '') {
-            this.gameBoard[0][2] = 'O';
-            return;
-          } else if(this.gameBoard[2][0] == '') {
+          } 
+        } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[1][1] == 'X') {
+          if(this.gameBoard[2][0] == '') {
             this.gameBoard[2][0] = 'O';
             return;
-          } else if(this.gameBoard[2][2] == '') {
-            this.gameBoard[2][2] = 'O';
+          } 
+        } else if(this.gameBoard[0][2] == 'X' && this.gameBoard[2][0] == 'X') {
+          if(this.gameBoard[1][1] == '') {
+            this.gameBoard[1][1] = 'O';
+            return;
+          } 
+        } else if(this.gameBoard[1][1] == 'X' && this.gameBoard[2][0] == 'X') {
+          if(this.gameBoard[0][2] == '') {
+            this.gameBoard[0][2] = 'O';
+            return;
+          } 
+        }
+        this.easyMove();
+      },
+      hardMove() {            
+        let playedNumber = this.playedMove();
+        console.log(playedNumber);
+        if(playedNumber == 1) {
+          if(this.gameBoard[0][0] == 'X' || this.gameBoard[0][2] == 'X' || this.gameBoard[2][0] == 'X' || this.gameBoard[2][2] == 'X') {
+            this.gameBoard[1][1] = 'O';
+            return;
+          } else if (this.gameBoard[1][1] == 'X') {
+            this.gameBoard[0][0] = 'O';
+            return;
+          } else {
+            if(this.gameBoard[0][0] == '') {
+              this.gameBoard[0][0] = 'O';
+              return;
+            } else if(this.gameBoard[0][2] == '') {
+              this.gameBoard[0][2] = 'O';
+              return;
+            } else if(this.gameBoard[2][0] == '') {
+              this.gameBoard[2][0] = 'O';
+              return;
+            } else if(this.gameBoard[2][2] == '') {
+              this.gameBoard[2][2] = 'O';
+              return;
+            }
+          }
+        } else if(playedNumber == 3) {
+          if(this.gameBoard[1][1] == '') {
+            this.gameBoard[1][1] = 'O';
             return;
           }
         }
-      } else if(playedNumber == 3) {
-        if(this.gameBoard[1][1] == '') {
-          this.gameBoard[1][1] = 'O';
+        this.mediumMove();
+      },
+      computerMove() {
+        if(this.difficulty == 'Easy') {
+          this.easyMove();
+        } else if(this.difficulty == 'Medium') {
+          this.mediumMove();
+        } else if(this.difficulty == 'Hard') {
+          this.hardMove();
+        }
+      },
+      userClick(userRow, userColumn) {
+        if(this.winner || !this.isUserTurn) {
           return;
         }
-      }
-      this.mediumMove();
-    },
-    computerMove() {
-      if(this.difficulty == 'Easy') {
-        this.easyMove();
-      } else if(this.difficulty == 'Medium') {
-        this.mediumMove();
-      } else if(this.difficulty == 'Hard') {
-        this.hardMove();
-      }
-    },
-    userClick(userRow, userColumn) {
-      if(this.winner || !this.isUserTurn) {
-        return;
-      }
-      if(this.gameBoard[userRow][userColumn] === '' && this.modeIs != 'Multiplayer') {
-        this.isUserTurn = false;
-        this.gameBoard[userRow][userColumn] = 'X';
-        if(this.isDone()) {
-          this.winner = 'X';
-        } else if(this.isDraw()) {
-          this.draw = 'draw';
-        } else {
-          setTimeout(() => {
-            this.computerMove();
-            if(this.isDone()) {               
-              this.winner = 'O';              
-              }
-            this.isUserTurn = true;
-            this.$forceUpdate();
-          }, 800); 
+        if(this.gameBoard[userRow][userColumn] === '' && this.modeIs != 'Multiplayer') {
+          this.isUserTurn = false;
+          this.gameBoard[userRow][userColumn] = 'X';
+          if(this.isDone()) {
+            this.winner = 'X';
+          } else if(this.isDraw()) {
+            this.draw = 'draw';
+          } else {
+            setTimeout(() => {
+              this.computerMove();
+              if(this.isDone()) {               
+                this.winner = 'O';              
+                }
+              this.isUserTurn = true;
+              this.$forceUpdate();
+            }, 800); 
+          }
+          this.$forceUpdate();
+        }  else {
+          return;
         }
-        this.$forceUpdate();
-      }  else {
-        return;
-      }
-    },
-    playedMove() {
-      this.filledNumber = 0;
-      for(let i = 0; i < 3; i++) {
-        for(let j = 0; j < 3; j++) {
-          if(this.gameBoard[i][j] != '') {
-            this.filledNumber++;
+      },
+      playedMove() {
+        this.filledNumber = 0;
+        for(let i = 0; i < 3; i++) {
+          for(let j = 0; j < 3; j++) {
+            if(this.gameBoard[i][j] != '') {
+              this.filledNumber++;
+            }
           }
         }
-      }
-      return this.filledNumber;
-    },
-    isDone() {
-      for(let i=0; i<3; i++) {
-        if(this.gameBoard[0][i] && this.gameBoard[0][i] === this.gameBoard[1][i] && this.gameBoard[0][i] === this.gameBoard[2][i]) {
-          return true;
-        }
-      }
-      for(let i=0; i<3; i++) {
-        if(this.gameBoard[i][0] && this.gameBoard[i][0] === this.gameBoard[i][1] && this.gameBoard[i][0] === this.gameBoard[i][2]) {
-          return true;
-        }
-      }
-      if(this.gameBoard[0][0] && this.gameBoard[0][0] === this.gameBoard[1][1] && this.gameBoard[0][0] === this.gameBoard[2][2]) {
-        return true;
-      }
-      if(this.gameBoard[0][2] && this.gameBoard[0][2] === this.gameBoard[1][1] && this.gameBoard[0][2] === this.gameBoard[2][0]) {
-        return true;
-      }
-      return false;
-    },
-    isDraw() {
-      let emptyCount = 0;
-      for(let i=0; i<3; i++) {
-        for(let j=0; j<3; j++) {
-          if(this.gameBoard[i][j] === '') {
-            emptyCount++;
+        return this.filledNumber;
+      },
+      isDone() {
+        for(let i=0; i<3; i++) {
+          if(this.gameBoard[0][i] && this.gameBoard[0][i] === this.gameBoard[1][i] && this.gameBoard[0][i] === this.gameBoard[2][i]) {
+            return true;
           }
         }
-      }
-      if(!emptyCount) {
-        return true;
-      }
-      return false;
-    },
-    restart() {
-      this.gameBoard = [["","",""], ["","",""], ["","",""]];
-      this.winner = null;
-      this.draw = null;
-      this.isUserTurn = true;
-      this.filledNumber = 0;
-    }     
+        for(let i=0; i<3; i++) {
+          if(this.gameBoard[i][0] && this.gameBoard[i][0] === this.gameBoard[i][1] && this.gameBoard[i][0] === this.gameBoard[i][2]) {
+            return true;
+          }
+        }
+        if(this.gameBoard[0][0] && this.gameBoard[0][0] === this.gameBoard[1][1] && this.gameBoard[0][0] === this.gameBoard[2][2]) {
+          return true;
+        }
+        if(this.gameBoard[0][2] && this.gameBoard[0][2] === this.gameBoard[1][1] && this.gameBoard[0][2] === this.gameBoard[2][0]) {
+          return true;
+        }
+        return false;
+      },
+      isDraw() {
+        let emptyCount = 0;
+        for(let i=0; i<3; i++) {
+          for(let j=0; j<3; j++) {
+            if(this.gameBoard[i][j] === '') {
+              emptyCount++;
+            }
+          }
+        }
+        if(!emptyCount) {
+          return true;
+        }
+        return false;
+      },
+      restart() {
+        this.gameBoard = [["","",""], ["","",""], ["","",""]];
+        this.winner = null;
+        this.draw = null;
+        this.isUserTurn = true;
+        this.filledNumber = 0;
+      }     
+    }
   }
-}
 </script>
   
 <!-- Add "scoped" attribute to limit CSS to this component only -->
