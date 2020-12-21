@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 @click="restart">Tic-Tac-Toe</h1>
+    <h1>Tic-Tac-Toe</h1>
     <div>
       <label for="options">Choose game mode: </label>
       <select id="options" v-model="isSingleMode">

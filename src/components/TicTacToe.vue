@@ -1,4 +1,4 @@
-<template v-slot="static-content">
+<template>
   <div class="game">
     <table v-if="gameBoard" cellspacing="0">
       <tr v-for="(row, rowIndex) in gameBoard" :key="rowIndex">
@@ -29,7 +29,7 @@
         winner: null,
         draw: null,               // mod seçildikten sonra değişirse oyun resetlenecek
         isUserTurn: true,         // multiplayer modu
-        whichUser: 'X',
+        isXTurn: true,
         filledNumber: 0
       }
     },
@@ -158,24 +158,45 @@
         if(this.winner || !this.isUserTurn) {
           return;
         }
-        if(this.gameBoard[userRow][userColumn] === '' && this.modeIs != 'Multiplayer') {
-          this.isUserTurn = false;
-          this.gameBoard[userRow][userColumn] = 'X';
-          if(this.isDone()) {
-            this.winner = 'X';
-          } else if(this.isDraw()) {
-            this.draw = 'draw';
+        if(this.gameBoard[userRow][userColumn] === '') {
+          if(this.modeIs != 'Multiplayer') {
+            this.isUserTurn = false;
+            this.gameBoard[userRow][userColumn] = 'X';
+            if(this.isDone()) {
+              this.winner = 'X';
+            } else if(this.isDraw()) {
+              this.draw = 'draw';
+            } else {
+              setTimeout(() => {
+                this.computerMove();
+                if(this.isDone()) {               
+                  this.winner = 'O';              
+                  }
+                this.isUserTurn = true;
+                this.$forceUpdate();
+              }, 800); 
+            }
+            this.$forceUpdate();
           } else {
-            setTimeout(() => {
-              this.computerMove();
-              if(this.isDone()) {               
-                this.winner = 'O';              
-                }
-              this.isUserTurn = true;
-              this.$forceUpdate();
-            }, 800); 
+            if(this.isXTurn) {
+              this.gameBoard[userRow][userColumn] = 'X';
+              if(this.isDone()) {
+                this.winner = 'X';
+              } else if(this.isDraw()) {
+                this.draw = 'draw';
+              }
+              this.isXTurn = false;
+            } else {
+              this.gameBoard[userRow][userColumn] = 'O';
+              if(this.isDone()) {
+                this.winner = 'X';
+              } else if(this.isDraw()) {
+                this.draw = 'draw';
+              } 
+              this.isXTurn = true;
+            }
+            this.$forceUpdate();
           }
-          this.$forceUpdate();
         }  else {
           return;
         }
@@ -231,6 +252,9 @@
         this.isUserTurn = true;
         this.filledNumber = 0;
       }     
+    },
+    watch: {
+      
     }
   }
 </script>
