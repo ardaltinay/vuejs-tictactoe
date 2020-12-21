@@ -254,7 +254,12 @@
       }     
     },
     watch: {
-      
+      difficulty: function() {
+        this.restart();
+      },
+      modeIs: function() {
+        this.restart();
+      }
     }
   }
 </script>
