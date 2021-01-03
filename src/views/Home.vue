@@ -12,8 +12,7 @@
       <label for="levels">Choose game level: </label>
       <select id="levels" v-model="gameDifficulty">
         <option>Easy</option>
-        <option>Medium</option>
-        <option>Hard</option>
+        <option>Normal</option>
       </select>
     </div>
     <game-component :gameDifficulty="gameDifficulty" :modeIs="isSingleMode"></game-component>
@@ -38,17 +37,6 @@ export default {
       gameDifficulty: ""
     }
   },
-  watch: {
-    isSingleMode: function() {
-      
-    },
-    gameDifficulty: function() {
-      console.log("değişti-1");
-    }
-  },
-  methods: {
-    
-  }
 }
 </script>
 

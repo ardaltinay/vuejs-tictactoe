@@ -27,8 +27,8 @@
           ["","",""]
         ],
         winner: null,
-        draw: null,               // mod seçildikten sonra değişirse oyun resetlenecek
-        isUserTurn: true,         // multiplayer modu
+        draw: null,               
+        isUserTurn: true,         
         isXTurn: true,
         filledNumber: 0
       }
@@ -45,7 +45,7 @@
           } 
         }
       },
-      mediumMove() {          
+      normalMove() {          
         for(let i=0; i<3; i++) {
           if(this.gameBoard[i][0] == 'X' && this.gameBoard[i][1] == 'X') {
             if(this.gameBoard[i][2] == '') {
@@ -110,11 +110,7 @@
             return;
           } 
         }
-        this.easyMove();
-      },
-      hardMove() {            
         let playedNumber = this.playedMove();
-        console.log(playedNumber);
         if(playedNumber == 1) {
           if(this.gameBoard[0][0] == 'X' || this.gameBoard[0][2] == 'X' || this.gameBoard[2][0] == 'X' || this.gameBoard[2][2] == 'X') {
             this.gameBoard[1][1] = 'O';
@@ -143,16 +139,14 @@
             return;
           }
         }
-        this.mediumMove();
+        this.easyMove();
       },
       computerMove() {
         if(this.difficulty == 'Easy') {
           this.easyMove();
-        } else if(this.difficulty == 'Medium') {
-          this.mediumMove();
-        } else if(this.difficulty == 'Hard') {
-          this.hardMove();
-        }
+        } else if(this.difficulty == 'Normal') {
+          this.normalMove();
+        } 
       },
       userClick(userRow, userColumn) {
         if(this.winner || !this.isUserTurn) {
